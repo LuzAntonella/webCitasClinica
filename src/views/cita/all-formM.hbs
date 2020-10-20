@@ -1,0 +1,40 @@
+<div class="row">
+    {{#each formM}}
+    <div class="card mx-auto">
+        <div class="card-body">
+            <h4 class="card-title" d-flex justify-content-between align-items-center>
+                Ficha Médica <a href="/citas/edit/{{ id }}"><i class="fas fa-edit"></i></a>
+            </h4>
+            </p>Documento de Identidad<div class="form-group">
+                <input type="text" name="documentoI" class="form-control" placeholder="Documento de identidad" autofocus
+                    value="{{ documentoI}}" disabled></p>
+
+            </div>
+            <div class="form-group">
+                </p>Género: <input type="text" name="documentoI" class="form-control"
+                    placeholder="Documento de identidad" autofocus value="{{ genero }}" disabled></p>
+
+            </div>
+            <div class="form-group">
+                </p>País: <input type="text" name="documentoI" class="form-control" placeholder="Documento de identidad"
+                    autofocus value="{{ pais }}" disabled></p>
+
+            </div>
+            <div class="form-group">
+                </p>Estado Civil: <input type="text" name="documentoI" class="form-control"
+                    placeholder="Documento de identidad" autofocus value="{{ civil }}" disabled></p>
+
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="card mx-auto">
+        <div class="card-body">
+            <h1>Hello</h1>
+            <p class="lead">No has llenado tu ficha médica</p>
+            <a href="/cita/addcita" class="btn btn-info btn-lg btn-block">Ingresar!</a>
+
+        </div>
+    </div>
+    {{/each}}
+</div>
