@@ -7,6 +7,11 @@ router.get('/cita/addcita',isAuthenticated,(req, res) => {
     res.render('cita/new-formM');
 });
 
+//separar cita
+router.get('/cita/separarC',isAuthenticated,(req, res) => {
+    res.render('cita/separarCita');
+});
+
 //aqui guardo los datos en la BD(esto es de formulario medico)
 router.post('/cita/new-cita', isAuthenticated,async (req,res) => {
     const {documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias}= req.body;
