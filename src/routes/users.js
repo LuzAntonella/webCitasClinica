@@ -22,7 +22,7 @@ router.post('/users/signup', async (req, res) =>{
     const {name,apellido,telefono,email, password, confirm_password} = req.body;
     const errors = [];
     
-    if(!name){
+    if(name.length <=0 ){
         errors.push({text: 'Por favor inserte su nombre'});
     }
     if(!apellido){
@@ -38,22 +38,25 @@ router.post('/users/signup', async (req, res) =>{
         errors.push({text: 'Contraseña debe ser mayor a 4 dígitos'});
     }
     if (errors.length > 0){
-        res.render('users/signup',{errors,name,apellido,telefono,email, password, confirm_password});
+        res.render('users/signup', {errors,name,apellido,telefono,email, password, confirm_password});
     }else{
         const emailUser = await User.findOne({email: email});
-         if(emailUser){
-            req.flash('error_msg','El email está en uso');
+        if(emailUser){
+            req.flash('error_msg','The Email is already in use');
             res.redirect('/users/signup');
         }
-        
+
         const newUser = new User({name,apellido,telefono,email, password});
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
-        req.flash('success_msg','Registro exitoso');
+        req.flash('success_msg','You are registered');
         res.redirect('/users/signin');
     }
    
 });
-
-
+//cerrar sesion
+router.get('/users/logout' , (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
 module.exports = router;

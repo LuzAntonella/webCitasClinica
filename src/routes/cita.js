@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const FormMedico = require('../models/FormMedico')
+const { isAuthenticated } = require('../helpers/auth');
 
-router.get('/cita/addcita',(req, res) => {
+router.get('/cita/addcita',isAuthenticated,(req, res) => {
     res.render('cita/new-formM');
 });
 
 //aqui guardo los datos en la BD(esto es de formulario medico)
-router.post('/cita/new-cita', async (req,res) => {
+router.post('/cita/new-cita', isAuthenticated,async (req,res) => {
     const {documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias}= req.body;
     const errors =[];
     if(!documentoI){
@@ -35,6 +36,8 @@ router.post('/cita/new-cita', async (req,res) => {
         });
     } else{
         const newFormMedico = new FormMedico({documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias});
+        //enlazo para cada uno
+        newFormMedico.user = req.user.id;
         await newFormMedico.save();
         req.flash('success_msg','Ficha médica agregada exitosamente');
         //luego de que se guarda lo direcciono a selección cita
@@ -72,8 +75,8 @@ esto nos sirve para los medicos*/
       })
   });*/
 
-  router.get('/citas', async (req, res) => {
-    await FormMedico.find()
+  router.get('/citas', isAuthenticated,async (req, res) => {
+    await FormMedico.find({user: req.user.id})
       .then(documentos => {
         const contexto = {
             formM: documentos.map(documento => {
@@ -96,7 +99,7 @@ esto nos sirve para los medicos*/
       })
   });
 //recibir el id y mostrar
-  router.get('/citas/edit/:id', async (req, res) => {
+  router.get('/citas/edit/:id', isAuthenticated,async (req, res) => {
     const formM = await FormMedico.findById(req.params.id)
     .then(data =>{
         return {
@@ -116,7 +119,7 @@ esto nos sirve para los medicos*/
 });
 
 //guardar las modificaciones(excepto lo check)
-router.put('/citas/edit-formM/:id',async (req, res) =>{
+router.put('/citas/edit-formM/:id',isAuthenticated,async (req, res) =>{
     const {documentoI,pais, tipoSangre, seguroM, enfermedadPrevia ,alergias} = req.body;
     //actualizar
      await FormMedico.findByIdAndUpdate(req.params.id, {documentoI,pais, tipoSangre, seguroM, enfermedadPrevia ,alergias});

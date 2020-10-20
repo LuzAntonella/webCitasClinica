@@ -10,7 +10,8 @@ const FormMedicoSchema = new Schema({
     seguroM : { type:String, required: false },
     enfermedadPrevia : { type:String, required:true},
     alergias : { type:String, required:true},
-    date : { type:Date, default: Date.now }
+    date : { type:Date, default: Date.now },
+    user : { type: String}
 });
-
+//agrego el user para relacionarlo-y se modifica en la cita-Post
 module.exports = mongoose.model('FormMedico', FormMedicoSchema);
