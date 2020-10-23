@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/citas-clinica', {
+mongoose.connect('mongodb://localhost/gimnasio-fitness', {
     useCreateIndex : true ,
     useNewUrlParser : true ,
     useFindAndModify : false

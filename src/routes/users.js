@@ -8,7 +8,7 @@ router.get('/users/signin',(req, res) => {
 });
 
 router.post('/users/signin', passport.authenticate('local', {
-    successRedirect: '/citas',
+    successRedirect: '/moduloU',
     failureRedirect: '/users/signin',
     failureFlash: true
 }));
