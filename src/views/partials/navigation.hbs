@@ -1,8 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #ABEBC6 ;">
+<nav class="navbar navbar-expand-lg navbar navbar-light border-bottom" style="background-color:  #ffff ;">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="/img/clinica1.png" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy">
-        </a>
         <a class="navbar-brand" href="/">Gimnasio Fitness</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,29 +16,23 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 {{#if user}}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Gimnasio
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/">Compra Suplementos</a>
-                        <a class="dropdown-item" href="/">Configuration</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/users/logout">Logout</a>
-                    </div>
-                </li>
-                {{else}}
-                <li class="nav-item active">
-                    <a class="nav-link" href="/users/signin">SigIn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/signup">SignUp</a>
-                </li>
-                {{/if}}
+                <a class="nav-link" href="/moduloU">Panel</a>
+                <a class="nav-link" href="/">Compra Suplementos</a>
+                <a class="nav-link" href="/users/logout">Logout <i class="fas fa-sign-out-alt"></i></a>
 
-
-            </ul>
         </div>
+        </li>
+        {{else}}
+        <li class="nav-item active">
+            <a class="nav-link" href="/users/signin">SigIn</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users/signup">SignUp</a>
+        </li>
+        {{/if}}
+
+
+        </ul>
+    </div>
     </div>
 </nav>
